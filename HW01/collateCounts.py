@@ -23,25 +23,31 @@ import sys
 from collections import defaultdict
 
 ########### PROVIDED IMPLEMENTATION ##############
-counts = defaultdict(int)
-# stream over lines from Standard Input
-for line in sys.stdin:
-    # extract words & counts
-    word, count  = line.split()
-    # tally counts
-    counts[word] += int(count)
-# print counts
-for wrd, count in counts.items():
-    print("{}\t{}".format(wrd,count))
+#counts = defaultdict(int)
+## stream over lines from Standard Input
+#for line in sys.stdin:
+#    # extract words & counts
+#	word, count  = line.split()
+#    # tally counts
+#    counts[word] += int(count)
+## print counts
+#for wrd, count in counts.items():
+#    print("{}\t{}".format(wrd,count))
 ########## (END) PROVIDED IMPLEMENTATION #########
 
 ################# YOUR CODE HERE #################
-
-
-
-
-
-
-
-
+# stream over lines from Standard Input
+lastWord = None
+tempSum = 0
+for line in sys.stdin:
+	word, count = line.split()
+	if lastWord is None:
+		lastWord = word
+		tempSum = int(count)
+	elif word == lastWord:
+		tempSum +=int(count)
+	else:
+		print("{}\t{}".format(lastWord,tempSum))
+		lastWord = word
+		tempSum = int(count)
 ################ (END) YOUR CODE #################

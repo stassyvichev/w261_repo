@@ -27,6 +27,10 @@
 #              piping them into the reducer script and on to $data.output.
 # --------------------------------------------------------------------
 
+# STUDENT NOTE: Please note that I have changed the calls to the mapper 
+# and reducer to "python $mapper ..." and "python $reducer ..."
+# as otherwise they wouldn't work for me.
+
 usage()
 {
     echo ERROR: No arguments supplied
@@ -92,10 +96,10 @@ if [ $# -eq 4 ]
     reducer=$4
     ################ YOUR CODE HERE #############
     # Q6c solution here:
-	# python $reducer < cat $countfiles > $data.output
-	cat $countfiles | python $reducer > $data.output
+	# cat $countfiles | python $reducer > $data.output
+	
     # Q7b solution here (comment out the line above):
-
+	cat $countfiles | sort | python $reducer > $data.output
     ################# (END YOUR CODE)###########
 fi
 
