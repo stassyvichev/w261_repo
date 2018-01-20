@@ -12,8 +12,9 @@ import sys
 # read from standard input
 for line in sys.stdin:
     line = line.strip()
-
+    
 ############ YOUR CODE HERE #########
-
+    key, value = line.split()
+    print '%s\t%s' % (int(value), key)    
 
 ############ (END) YOUR CODE #########
