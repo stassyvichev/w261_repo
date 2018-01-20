@@ -1,15 +1,22 @@
 #!/usr/bin/env python
 """
-<write your description here>
+Mapper to be called by Hadoop Streaming for performing word count
 INPUT:
-    <specify record format here>
+    Lines of text passed to stdin, where individual words are specified by spaces. 
+    Example:
+    the quick brown fox jumped over the lazy dog
 OUTPUT:
-    <specify record format here>
+    Each word encountered in the text, followed by a tab and int(1), printed to stdout. 
+    Example:
+    the     1
+    quick   1
+    brown   1
+    etc..
 """
 import re
 import sys
 
-# read from standard intpu
+# read from standard input
 for line in sys.stdin:
     line = line.strip()
     # tokenize

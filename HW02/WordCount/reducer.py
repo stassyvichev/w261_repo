@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 """    
-<write your description here>
+Reducer used for counting words.
 INPUT:
-    <specify record format here>
+    Key-value pairs read from stdin in the form word\tcount 
+    for a set of word and all their counts, sorted by key. 
 OUTPUT:
-    <specify record format here>
+    key-value pairs to stdout with each word and its number of counts. 
 """
 import sys
 
