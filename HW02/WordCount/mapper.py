@@ -2,7 +2,7 @@
 """
 Mapper to be called by Hadoop Streaming for performing word count
 INPUT:
-    Lines of text passed to stdin, where individual words are specified by spaces. 
+    Lines of text passed to stdin, where individual words are separated by spaces. 
     Example:
     the quick brown fox jumped over the lazy dog
 OUTPUT:
