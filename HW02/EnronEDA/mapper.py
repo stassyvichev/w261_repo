@@ -16,7 +16,8 @@ for line in sys.stdin:
     # tokenize
     words = re.findall(r'[a-z]+', subject + ' ' + body)
 ############ YOUR CODE HERE #########
-
+    for word in words:
+        print '%s\t%s\t%s' % (word, _class, 1)
 
 
 ############ (END) YOUR CODE #########
