@@ -54,12 +54,16 @@ for line in sys.stdin:
     ################# YOUR CODE HERE ################
     # TIP: try using MODEL.get(word, (0,0)) to access the tuple 
     # of log probabilities without throwing a KeyError!
-
-
+    pHam,pSpam = MODEL.get("ClassPriors",(0,0))
+    for word in words:
+        pc_ham,pc_spam = MODEL.get(word, (0,0))
+        pHam += pc_ham
+        pSpam += pc_spam
     
+    pHam = np.exp(pHam)
+    pSpam = np.exp(pSpam)
     
-    
-
+    pred_class = int(pSpam >pHam)
     ################# (END) YOUR CODE ##############
     
     print "{}\t{}\t{}\t{}\t{}".format(docID, _class, pHam, pSpam, pred_class)
