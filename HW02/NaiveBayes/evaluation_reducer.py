@@ -37,6 +37,7 @@ for line in sys.stdin:
     
     # then compute evaluation stats
 #################### YOUR CODE HERE ###################
+    
 
 
 
@@ -55,6 +56,7 @@ for line in sys.stdin:
 
 
 
-
-
+precision = TP/(TP+FP)
+recall = TP/(TP+FN)
+f_score = 2*(precision*recall)/(precision+recall)
 #################### (END) YOUR CODE ###################    
