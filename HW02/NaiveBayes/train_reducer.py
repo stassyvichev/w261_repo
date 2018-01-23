@@ -25,7 +25,6 @@ import sys
 # initialize trackers
 c0_doc_count, c1_doc_count, c1_word_count, c0_word_count = 0,0,0,0
 curr_word = "*"
-curr_word_count = 0
 curr_word_c0_count = 0
 curr_word_c1_count = 0
 
@@ -52,9 +51,7 @@ for line in sys.stdin:
                 c0_word_count += count
         else:
             # we use -1 to denote word counts
-            if isSpam == -1:
-                curr_word_count += count
-            elif isSpam == 0:
+            if isSpam == 0:
                 curr_word_c0_count += count
             else:
                 curr_word_c1_count += count
@@ -70,12 +67,9 @@ for line in sys.stdin:
             cond_prob_c0 = curr_word_c0_count/float(c0_word_count)
             cond_prob_c1 = curr_word_c1_count/float(c1_word_count)
             print "%s\t%s\t%s\t%s\t%s" % (curr_word, curr_word_c0_count, curr_word_c1_count,cond_prob_c0 , cond_prob_c1) 
-            curr_word_count = 0
             curr_word_c0_count = 0
             curr_word_c1_count = 0
-            if isSpam == -1:
-                curr_word_count += count
-            elif isSpam == 0:
+            if isSpam == 0:
                 curr_word_c0_count += count
             else:
                 curr_word_c1_count += count
@@ -86,37 +80,4 @@ for line in sys.stdin:
 cond_prob_c0 = curr_word_c0_count/float(c0_word_count)
 cond_prob_c1 = curr_word_c1_count/float(c1_word_count)
 print "%s\t%s\t%s\t%s\t%s" % (curr_word, curr_word_c0_count, curr_word_c1_count,cond_prob_c0 , cond_prob_c1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ##################### (END) CODE HERE ####################
