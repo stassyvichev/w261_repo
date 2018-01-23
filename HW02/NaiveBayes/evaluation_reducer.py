@@ -27,6 +27,8 @@ FP = 0.0 # false positives
 FN = 0.0 # false negatives
 TP = 0.0 # true positives
 TN = 0.0 # true negatives
+count = 0.0
+correct = 0.0
 
 # read from STDIN
 for line in sys.stdin:
@@ -37,26 +39,14 @@ for line in sys.stdin:
     
     # then compute evaluation stats
 #################### YOUR CODE HERE ###################
+    count +=1
+    if class_ == pred:
+        correct +=1
+
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 precision = TP/(TP+FP)
 recall = TP/(TP+FN)
+accuracy = correct/count
 f_score = 2*(precision*recall)/(precision+recall)
 #################### (END) YOUR CODE ###################    
