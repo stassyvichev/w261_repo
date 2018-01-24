@@ -39,14 +39,35 @@ for line in sys.stdin:
     
     # then compute evaluation stats
 #################### YOUR CODE HERE ###################
+    class_ = int(class_)
+    pred = int(pred)
     count +=1
     if class_ == pred:
         correct +=1
+    if class_ == 1:
+        if pred == 1:
+            TP +=1
+        else:
+            FN +=1
+    else:
+        if pred == 1:
+            FP +=1
+        else:
+            TN +=1
 
-    
 
-precision = TP/(TP+FP)
-recall = TP/(TP+FN)
 accuracy = correct/count
-f_score = 2*(precision*recall)/(precision+recall)
+if TP != 0.0:
+    precision = TP/(TP+FP)
+    recall = TP/(TP+FN)
+    f_score = 2*(precision*recall)/(precision+recall)
+    print "Precision %s " % precision
+    print "Recall %s " % recall
+    print "Accuracy %s " % accuracy
+    print "F-score %s " % f_score
+else:
+    print "no precision"
+    print "no recall"
+    print "Accuracy %s " % accuracy
+    print "no f-score"
 #################### (END) YOUR CODE ###################    

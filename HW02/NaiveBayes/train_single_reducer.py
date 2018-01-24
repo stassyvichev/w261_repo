@@ -40,7 +40,7 @@ for line in sys.stdin:
         total_count = c0_doc_count+c1_doc_count
         c0_prior = c0_doc_count/float(total_count)
         c1_prior = c1_doc_count/float(total_count)
-        print "%s\t%s\t%s\t%s\t%s" % ("ClassPriors", c0_doc_count, c1_doc_count, c0_prior, c1_prior) 
+        print "%s\t%s,%s,%s,%s" % ("ClassPriors", c0_doc_count, c1_doc_count, c0_prior, c1_prior) 
     elif word == ".":
         # use . to denote count of words with specific class class
         c0_word_count = c0_count
@@ -48,11 +48,11 @@ for line in sys.stdin:
     else:
         curr_word_c0_count = c0_count
         curr_word_c1_count = c1_count
-        
+         
         # calculate probabilities with K and vocab_size
         cond_prob_c0 = (curr_word_c0_count+K)/float(c0_word_count+vocab_size*K)
         cond_prob_c1 = (curr_word_c1_count+K)/float(c1_word_count+vocab_size*K)
-        print "%s\t%s\t%s\t%s\t%s" % (word, curr_word_c0_count, curr_word_c1_count,cond_prob_c0 , cond_prob_c1)
+        print "%s\t%s,%s,%s,%s" % (word, curr_word_c0_count, curr_word_c1_count,cond_prob_c0 , cond_prob_c1)
         
 
 

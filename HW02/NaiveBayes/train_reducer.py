@@ -58,7 +58,7 @@ for line in sys.stdin:
     else: 
         if curr_word == "*":
             total_count = c0_doc_count+c1_doc_count
-            print "%s\t%s\t%s\t%s\t%s" % ("ClassPriors", c0_doc_count, c1_doc_count, c0_doc_count/float(total_count), c1_doc_count/float(total_count)) 
+            print "%s\t%s,%s,%s,%s" % ("ClassPriors", c0_doc_count, c1_doc_count, c0_doc_count/float(total_count), c1_doc_count/float(total_count)) 
             if isSpam:
                 c1_word_count += count
             else:
@@ -66,7 +66,7 @@ for line in sys.stdin:
         elif curr_word !=".":
             cond_prob_c0 = curr_word_c0_count/float(c0_word_count)
             cond_prob_c1 = curr_word_c1_count/float(c1_word_count)
-            print "%s\t%s\t%s\t%s\t%s" % (curr_word, curr_word_c0_count, curr_word_c1_count,cond_prob_c0 , cond_prob_c1) 
+            print "%s\t%s,%s,%s,%s" % (curr_word, curr_word_c0_count, curr_word_c1_count,cond_prob_c0 , cond_prob_c1) 
             curr_word_c0_count = 0
             curr_word_c1_count = 0
             if isSpam == 0:
@@ -79,5 +79,5 @@ for line in sys.stdin:
 # printing the last word                
 cond_prob_c0 = curr_word_c0_count/float(c0_word_count)
 cond_prob_c1 = curr_word_c1_count/float(c1_word_count)
-print "%s\t%s\t%s\t%s\t%s" % (curr_word, curr_word_c0_count, curr_word_c1_count,cond_prob_c0 , cond_prob_c1)
+print "%s\t%s,%s,%s,%s" % (curr_word, curr_word_c0_count, curr_word_c1_count,cond_prob_c0 , cond_prob_c1)
 ##################### (END) CODE HERE ####################
