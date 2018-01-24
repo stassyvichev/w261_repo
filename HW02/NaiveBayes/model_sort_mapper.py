@@ -15,4 +15,4 @@ for line in sys.stdin:
         maxClass, maxClassP = 'ham', ham_cProb
     else:
         maxClass, maxClassP = 'spam', spam_cProb
-    print "{}\t{}\t{}\t{}".format(word, payload, maxClass, maxClassP)
+    print "%s\t%s\t%s\t%s" % (word, payload, maxClass, maxClassP)
