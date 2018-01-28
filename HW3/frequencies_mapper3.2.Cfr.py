@@ -8,12 +8,12 @@ import sys
 for line in sys.stdin:
     line = line.strip()
     word, count = line.split("\t")
-    firstLetter = word[0]
-    if firstLetter < "m":
-        print '%s\t%s\t%s\t' % ("a",word, count)
-    else:
-        print '%s\t%s\t%s\t' % ("b",word, count)
     
-    print '%s\t%s\t%s\t' % ("a",count, 0)
-    print '%s\t%s\t%s\t' % ("b",count, 0)
+    if int(count) < 3000:
+        print '%s\t%s\t%s' % ("A",word, count)
+    else:
+        print '%s\t%s\t%s' % ("B",word, count)
+    
+    print '%s\t%s\t%s' % ("A",count, 0)
+    print '%s\t%s\t%s' % ("B",count, 0)
 # END STUDENT CODE HW32CFREQMAPPER

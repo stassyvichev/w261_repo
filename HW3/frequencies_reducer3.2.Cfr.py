@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # START STUDENT CODE HW32CFREQREDUCER
 import sys, re
-
+import logging
 # initialize trackers
 cur_word = None
 cur_count = 0
@@ -9,7 +9,9 @@ total = 0
 # read input key-value pairs from standard input
 
 for line in sys.stdin:
-    extra, key, value,_ = line.split("\t")
+#     logging.warning( line.split("\t"))
+    arr = line.split("\t")
+    extra, key, value = arr[0], arr[1], arr[2]
     if int(value) == 0 and not re.findall(r"[a-z]+", key.lower()):
         total = total + int(key)
     else:
@@ -27,5 +29,4 @@ for line in sys.stdin:
 prob = (cur_count*1.0)/total
 print '%s\t%s\t%s\t%s' % (extra, cur_word, cur_count, prob)
 
-print '%s\t%s\t%s\t%s' % (extra, "Total", total, 1)
 # END STUDENT CODE HW32CFREQREDUCER
