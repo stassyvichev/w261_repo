@@ -22,11 +22,11 @@ for line in sys.stdin:
         else: 
             if cur_word:
                 prob = (cur_count*1.0)/total
-                print '%s\t%s\t%s\t%s' % (extra, cur_word, cur_count, prob)
+                print '%s\t%s\t%s' % (cur_word, cur_count, prob)
             cur_word, cur_count  = key, int(value)
 
 # don't forget the last record! 
 prob = (cur_count*1.0)/total
-print '%s\t%s\t%s\t%s' % (extra, cur_word, cur_count, prob)
+print '%s\t%s\t%s' % (cur_word, cur_count, prob)
 
 # END STUDENT CODE HW32CFREQREDUCER
