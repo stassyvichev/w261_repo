@@ -39,8 +39,8 @@ class MRPageCount(MRJob):
                         "mapreduce.job.reduces": "1",
                         "stream.num.map.output.key.fields": 2,
                         "mapreduce.job.output.key.comparator.class" : "org.apache.hadoop.mapred.lib.KeyFieldBasedComparator",
-                        "mapreduce.partition.keycomparator.options":"-k2,2nr",
-                        "mapred.num.key.comparator.options":"-k2,2nr",
+                        #"mapreduce.partition.keycomparator.options":"-k2,2nr",
+                        #"mapred.num.key.comparator.options":"-k2,2nr",
                         "mapred.text.key.comparator.options": "-k2,2nr",
                         "SORT_VALUES":True
                    }
