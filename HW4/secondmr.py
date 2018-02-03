@@ -1,18 +1,15 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 import re
+import logging
 
 WORD_RE = re.compile(r"[\w']+")
 
 class MRWordFreqCount(MRJob):
     
-    SORT_VALUES = False
+    SORT_VALUES = True
 
-    JOBCONF = {
-                "mapreduce.job.reduces": "1",
-                       "stream.num.map.output.key.fields": "1",
-                       'mapred.text.key.comparator.options': '-k1,1nr',
-    }
+    JOBCONF = {"mapreduce.job.reduces": "1"}
     def __init__(self, *args, **kwargs):
         super(MRWordFreqCount, self).__init__(*args,**kwargs)
         
@@ -30,28 +27,31 @@ class MRWordFreqCount(MRJob):
             yield word, val
     
     def sum_words(self, word, counts):
-#         yield None, (word, sum(counts))
-        v = sum(counts)
-        yield v, word
-
+        yield word, sum(counts)
     
     def map_max_words(self, word, count):
-#         print "m",word, count
+        logging.warning(word)
+        logging.warning(count)
         yield word, int(count)
         
-    def reduce_max_words(self, count, word):
-        yield word, count
+    def reduce_max_words(self, word, count):
+        yield word, sum(count)
         
     def steps(self):
         return [MRStep(mapper_init=self.init_get_words,
                        mapper=self.get_words,
                        mapper_final=self.final_get_words,
                        reducer=self.sum_words),
-               MRStep(reducer = self.reduce_max_words,
-                     jobconf={
-                       "mapreduce.job.reduces": "2",
-                       'mapred.text.key.comparator.options': '-k1,1nr',
-                       "SORT_VALUES":True
+               MRStep(mapper = self.map_max_words,
+                      reducer = self.reduce_max_words,
+                        jobconf={
+                        "mapreduce.job.reduces": "1",
+                        "stream.num.map.output.key.fields": 2,
+                        "mapreduce.job.output.key.comparator.class" : "org.apache.hadoop.mapred.lib.KeyFieldBasedComparator",
+                        "mapreduce.partition.keycomparator.options":"-k2,2nr",
+                        "mapred.num.key.comparator.options":"-k2,2nr",
+                        "mapred.text.key.comparator.options": "-k2,2nr",
+                        "SORT_VALUES":True
                    })
                ]
 
