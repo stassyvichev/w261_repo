@@ -1,0 +1,6 @@
+z z z
+a a b a
+b c c d
+z c a z
+z z z z
+c c z z
