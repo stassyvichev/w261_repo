@@ -16,19 +16,16 @@ from mrjob.step import MRStep
 
 class MRinvertedIndex(MRJob):
     
-  #START SUDENT CODE531_INV_INDEX
     def mapper(self, _, line):
         if line:
             word,stripe = line.split()
             stripe=json.loads(stripe)
             len_dict = len(stripe)
-            for key, value in stripe.items():
-                yield key, (word, len_dict)
+            for key, _ in stripe.items():
+                yield key, word.strip("\""), len_dict
     
-    def reducer(self, key, values)
-        print stripe # generate a list in the end
-
-  #END SUDENT CODE531_INV_INDEX
+    def reducer(self, key, values):
+        yield key, values
         
 if __name__ == '__main__':
     MRinvertedIndex.run() 
