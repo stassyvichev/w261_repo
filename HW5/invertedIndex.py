@@ -18,11 +18,12 @@ class MRinvertedIndex(MRJob):
     
     def mapper(self, _, line):
         if line:
+#             print line
             word,stripe = line.split()
             stripe=json.loads(stripe)
             len_dict = len(stripe)
             for key, _ in stripe.items():
-                yield key, word.strip("\""), len_dict
+                yield key, (word.strip("\""), len_dict)
     
     def reducer(self, key, values):
         yield key, values
