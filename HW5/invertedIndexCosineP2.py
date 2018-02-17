@@ -18,14 +18,14 @@ class MRinvertedIndexCosine(MRJob):
     
     def mapper(self, _, line):
         if line:
-            word,stripe = line.split()
+            word,stripe = line.split("\t")
             stripe=json.loads(stripe)
             stripe_length = 1/math.sqrt(len(stripe))
             for key, _ in stripe.items():
                 yield key, (word.strip("\""), stripe_length)
     
     def reducer(self, key, values):
-        yield key, values
+        yield key, list(values)
         
 if __name__ == '__main__':
     MRinvertedIndexCosine.run() 

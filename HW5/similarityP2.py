@@ -36,7 +36,6 @@ class MRSimilarity(MRJob):
             MRStep(
                 reducer = self.reducer_second,
                 jobconf={
-                        "mapreduce.job.reduces": "1",
                         "stream.num.map.output.key.fields": 1,
                         "mapreduce.job.output.key.comparator.class" : "org.apache.hadoop.mapred.lib.KeyFieldBasedComparator",
                         "mapreduce.partition.keycomparator.options":"-k1,1nr",

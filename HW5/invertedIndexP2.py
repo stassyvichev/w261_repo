@@ -25,7 +25,7 @@ class MRinvertedIndex(MRJob):
                 yield key, (word.strip("\""), len_dict)
     
     def reducer(self, key, values):
-        yield key, values
+        yield key, list(values)
         
 if __name__ == '__main__':
     MRinvertedIndex.run() 
