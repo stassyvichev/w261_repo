@@ -15,7 +15,16 @@ from mrjob.job import MRJob
 from mrjob.step import MRStep
 
 class MRinvertedIndex(MRJob):
-    
+    SORTED_VALUES = True
+    JOBCONF={
+#                 "mapreduce.job.reduces": "1",
+                "stream.num.map.output.key.fields": 2,
+                "mapreduce.job.output.key.comparator.class" : "org.apache.hadoop.mapred.lib.KeyFieldBasedComparator",
+                "mapreduce.partition.keycomparator.options":"-k1,1 -k2,2",
+                "mapred.num.key.comparator.options":"-k1,1 -k2,2",
+                "mapred.text.key.comparator.options": "-k1,1 -k2,2",
+                "SORT_VALUES":True
+    }
     def mapper(self, _, line):
         if line:
             word,stripe = line.split("\t")
