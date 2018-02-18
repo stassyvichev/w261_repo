@@ -22,6 +22,8 @@ class longest5gram(MRJob):
         if int(key)> self.longest_size:
             self.longest_size = int(key)
             self.longest_ngrams = list(values)
+        elif int(key) == self.longest_size:
+            self.longest_ngrams = list(self.longest_ngrams)+list(values)
             
     def reducer_final(self):
         yield self.longest_size, ";".join(list(self.longest_ngrams))
@@ -48,19 +50,11 @@ class longest5gram(MRJob):
                 reducer_final = self.reducer_final,
                 reducer = self.reducer,
                 jobconf={
-                    "mapreduce.job.reduces": "2",
+                    "mapreduce.job.reduces": "8",
                     "stream.num.map.output.key.fields": 1,
                     "mapreduce.job.output.key.comparator.class" : "org.apache.hadoop.mapred.lib.KeyFieldBasedComparator",
                     "mapreduce.partition.keycomparator.options":"-k1,1nr",
                 }
-#                 jobconf={
-#                     "stream.num.map.output.key.fields": 1,
-#                     "mapreduce.job.output.key.comparator.class" : "org.apache.hadoop.mapred.lib.KeyFieldBasedComparator",
-#                     "mapreduce.partition.keycomparator.options":"-k1,1nr",
-#                     "mapred.num.key.comparator.options":"-k1,1nr",
-#                     "mapred.text.key.comparator.options": "-k1,1nr",
-#                     "SORT_VALUES":True
-#                 }
             ),
             MRStep(
                 reducer_init = self.reducer_2_init,
