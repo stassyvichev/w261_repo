@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import re
+from datetime import datetime
+import sys
 
 import mrjob
 from mrjob.protocol import RawProtocol
@@ -15,7 +17,7 @@ class longest5gram(MRJob):
         yield len(fields[0]), fields[0]
     
     def reducer_init(self):
-        self.longest_ngrams = None
+        self.longest_ngrams = []
         self.longest_size = 0
         
     def reducer(self, key, values):
@@ -29,13 +31,13 @@ class longest5gram(MRJob):
         yield self.longest_size, ";".join(list(self.longest_ngrams))
     
     def reducer_2_init(self):
-        self.longest_2_ngrams = None
+        self.longest_2_ngrams = []
         self.longest_2_size = 0
     
     def reducer_2(self, key, values):
         if int(key)> self.longest_2_size:
             self.longest_2_size = int(key)
-            self.longest_2_ngrams = values
+            self.longest_2_ngrams = list(values)
         elif int(key) == self.longest_2_size:
             self.longest_2_ngrams = list(self.longest_2_ngrams)+list(values)
             
@@ -50,7 +52,7 @@ class longest5gram(MRJob):
                 reducer_final = self.reducer_final,
                 reducer = self.reducer,
                 jobconf={
-                    "mapreduce.job.reduces": "8",
+                    "mapreduce.job.reduces": "16",
                     "stream.num.map.output.key.fields": 1,
                     "mapreduce.job.output.key.comparator.class" : "org.apache.hadoop.mapred.lib.KeyFieldBasedComparator",
                     "mapreduce.partition.keycomparator.options":"-k1,1nr",
@@ -67,4 +69,8 @@ class longest5gram(MRJob):
         ]
     
 if __name__ == '__main__':
+    start_time = datetime.now()
     longest5gram.run()
+    end_time = datetime.now()
+    elapsed_time = end_time - start_time
+    sys.stderr.write(str(elapsed_time))
