@@ -1,4 +1,3 @@
-%%writefile lrBatchGd.py
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 # from numpy import random,array, dot
@@ -10,7 +9,7 @@ class MrJobLRBatchGD(MRJob):
             self.weights = [float(v) for v in f.readline().split(",")]
         self.partial_gradient = [0.0]*len(self.weights)
         self.partial_gradient = np.array(self.partial_gradient)
-        print np.array(self.partial_gradient)
+#         print np.array(self.partial_gradient)
         self.partial_count = 0
     
     def mapper(self, _, line):
